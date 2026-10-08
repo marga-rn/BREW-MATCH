@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BREW//MATCH | Find Your Perfect Brew</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+        BREW<span>//</span>MATCH
+    </div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#menu">Menu</a>
+        <a href="#quiz">Brew Match</a>
+        <a href="#orders">My Orders</a>
+    </nav>
+
+    <div class="nav-actions">
+
+        <button onclick="openCart()">
+            🛒 Cart
+            <span id="cartCount">0</span>
+        </button>
+
+        <button id="loginButton" onclick="openAuth()">
+            Login
+        </button>
+
+        <button
+            id="logoutButton"
+            onclick="logout()"
+            style="display:none;"
+        >
+            Logout
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- =========================
+     HOME
+========================= -->
+
+<section id="home" class="hero">
+
+    <div class="hero-content">
+
+        <p class="eyebrow">
+            YOUR COFFEE. YOUR MOOD.
+        </p>
+
+        <h1>
+            FIND YOUR
+            <span>PERFECT BREW.</span>
+        </h1>
+
+        <p>
+            Discover coffee that matches your taste,
+            mood and personality.
+        </p>
+
+        <div class="hero-buttons">
+
+            <button
+                class="primary-btn"
+                onclick="scrollToSection('quiz')"
+            >
+                Take Brew Match
+            </button>
+
+            <button
+                class="secondary-btn"
+                onclick="scrollToSection('menu')"
+            >
+                View Menu
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     BREW MATCH QUIZ
+========================= -->
+
+<section id="quiz" class="section">
+
+    <div class="section-heading">
+
+        <p class="eyebrow">
+            PERSONALIZED RECOMMENDATION
+        </p>
+
+        <h2>
+            BREW MATCH
+        </h2>
+
+        <p>
+            Answer three quick questions and
+            we'll find your perfect coffee.
+        </p>
+
+    </div>
+
+
+    <div class="quiz-card">
+
+        <div class="question">
+
+            <h3>
+                01 — How strong do you like your coffee?
+            </h3>
+
+            <div class="options">
+
+                <button
+                    class="quiz-option"
+                    data-question="strength"
+                    data-value="light"
+                >
+                    Light
+                </button>
+
+                <button
+                    class="quiz-option"
+                    data-question="strength"
+                    data-value="medium"
+                >
+                    Medium
+                </button>
+
+                <button
+                    class="quiz-option"
+                    data-question="strength"
+                    data-value="strong"
+                >
+                    Strong
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="question">
+
+            <h3>
+                02 — How sweet do you like your drink?
+            </h3>
+
+            <div class="options">
+
+                <button
+                    class="quiz-option"
+                    data-question="sweetness"
+                    data-value="low"
+                >
+                    Low
+                </button>
+
+                <button
+                    class="quiz-option"
+                    data-question="sweetness"
+                    data-value="medium"
+                >
+                    Medium
+                </button>
+
+                <button
+                    class="quiz-option"
+                    data-question="sweetness"
+                    data-value="high"
+                >
+                    High
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="question">
+
+            <h3>
+                03 — What's your coffee mood?
+            </h3>
+
+            <div class="options">
+
+                <button
+                    class="quiz-option"
+                    data-question="mood"
+                    data-value="classic"
+                >
+                    Classic
+                </button>
+
+                <button
+                    class="quiz-option"
+                    data-question="mood"
+                    data-value="sweet"
+                >
+                    Sweet
+                </button>
+
+                <button
+                    class="quiz-option"
+                    data-question="mood"
+                    data-value="adventure"
+                >
+                    Adventure
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="primary-btn full-btn"
+            onclick="getBrewMatch()"
+        >
+            FIND MY BREW
+        </button>
+
+
+        <div id="quizResult"></div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MENU
+========================= -->
+
+<section id="menu" class="section menu-section">
+
+    <div class="section-heading">
+
+        <p class="eyebrow">
+            OUR MENU
+        </p>
+
+        <h2>
+            PICK YOUR BREW
+        </h2>
+
+        <p>
+            Customize your favorite drink.
+        </p>
+
+    </div>
+
+    <div id="menuGrid" class="menu-grid">
+        Loading menu...
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ORDERS
+========================= -->
+
+<section id="orders" class="section">
+
+    <div class="section-heading">
+
+        <p class="eyebrow">
+            ORDER HISTORY
+        </p>
+
+        <h2>
+            MY ORDERS
+        </h2>
+
+        <!-- LIVE CONNECTION INDICATOR -->
+
+        <div
+            id="orderLiveStatus"
+            class="live-status"
+        >
+            <span class="live-dot"></span>
+            Checking live order status...
+        </div>
+
+    </div>
+
+
+    <div id="ordersContainer">
+
+        <div class="empty-state">
+            Please login to view your orders.
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CART MODAL
+========================= -->
+
+<div id="cartModal" class="modal">
+
+    <div class="modal-box">
+
+        <button
+            class="close-btn"
+            onclick="closeCart()"
+        >
+            ×
+        </button>
+
+        <h2>Your Cart</h2>
+
+        <div id="cartItems"></div>
+
+        <div class="cart-total">
+
+            <span>Total</span>
+
+            <strong id="cartTotal">
+                ₱0.00
+            </strong>
+
+        </div>
+
+        <button
+            class="primary-btn full-btn"
+            onclick="openCheckout()"
+        >
+            CHECKOUT
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     CHECKOUT MODAL
+========================= -->
+
+<div id="checkoutModal" class="modal">
+
+    <div class="modal-box">
+
+        <button
+            class="close-btn"
+            onclick="closeCheckout()"
+        >
+            ×
+        </button>
+
+        <h2>Checkout</h2>
+
+        <label>
+            Fulfillment
+        </label>
+
+        <select id="fulfillment">
+
+            <option value="Dine In">
+                Dine In
+            </option>
+
+            <option value="Pick-up">
+                Pick-up
+            </option>
+
+            <option value="Delivery">
+                Delivery
+            </option>
+
+        </select>
+
+
+        <label>
+            Delivery Address
+        </label>
+
+        <textarea
+            id="deliveryAddress"
+            placeholder="Enter address if delivery..."
+        ></textarea>
+
+
+        <div class="checkout-total">
+
+            Total:
+
+            <strong id="checkoutTotal">
+                ₱0.00
+            </strong>
+
+        </div>
+
+
+        <button
+            class="primary-btn full-btn"
+            onclick="placeOrder()"
+        >
+            PLACE ORDER
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     AUTH MODAL
+========================= -->
+
+<div id="authModal" class="modal">
+
+    <div class="modal-box">
+
+        <button
+            class="close-btn"
+            onclick="closeAuth()"
+        >
+            ×
+        </button>
+
+
+        <div id="loginForm">
+
+            <h2>Welcome Back</h2>
+
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="Email"
+            >
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Password"
+            >
+
+            <button
+                class="primary-btn full-btn"
+                onclick="login()"
+            >
+                LOGIN
+            </button>
+
+            <p class="switch-auth">
+
+                Don't have an account?
+
+                <button onclick="showRegister()">
+                    Sign Up
+                </button>
+
+            </p>
+
+        </div>
+
+
+        <div
+            id="registerForm"
+            style="display:none;"
+        >
+
+            <h2>Create Account</h2>
+
+            <input
+                type="text"
+                id="registerName"
+                placeholder="Full Name"
+            >
+
+            <input
+                type="email"
+                id="registerEmail"
+                placeholder="Email"
+            >
+
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="Password"
+            >
+
+            <input
+                type="text"
+                id="registerPhone"
+                placeholder="Phone Number"
+            >
+
+            <button
+                class="primary-btn full-btn"
+                onclick="register()"
+            >
+                CREATE ACCOUNT
+            </button>
+
+            <p class="switch-auth">
+
+                Already have an account?
+
+                <button onclick="showLogin()">
+                    Login
+                </button>
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     CUSTOMIZE MODAL
+========================= -->
+
+<div id="customizeModal" class="modal">
+
+    <div class="modal-box">
+
+        <button
+            class="close-btn"
+            onclick="closeCustomize()"
+        >
+            ×
+        </button>
+
+        <h2 id="customizeName">
+            Customize
+        </h2>
+
+        <input
+            type="hidden"
+            id="customizeProductId"
+        >
+
+
+        <label>
+            Size
+        </label>
+
+        <select id="customizeSize">
+
+            <option value="Small">
+                Small
+            </option>
+
+            <option value="Medium">
+                Medium (+₱20)
+            </option>
+
+            <option value="Large">
+                Large (+₱35)
+            </option>
+
+        </select>
+
+
+        <label>
+            Milk
+        </label>
+
+        <select id="customizeMilk">
+
+            <option value="Regular Milk">
+                Regular Milk
+            </option>
+
+            <option value="Oat Milk">
+                Oat Milk (+₱25)
+            </option>
+
+            <option value="Soy Milk">
+                Soy Milk (+₱20)
+            </option>
+
+        </select>
+
+
+        <label>
+            Sweetness
+        </label>
+
+        <select id="customizeSweetness">
+
+            <option value="Regular">
+                Regular
+            </option>
+
+            <option value="Less Sweet">
+                Less Sweet
+            </option>
+
+            <option value="Extra Sweet">
+                Extra Sweet
+            </option>
+
+        </select>
+
+
+        <label class="checkbox">
+
+            <input
+                type="checkbox"
+                id="customizeExtraShot"
+            >
+
+            Extra Shot (+₱30)
+
+        </label>
+
+
+        <button
+            class="primary-btn full-btn"
+            onclick="addCustomizedProduct()"
+        >
+            ADD TO CART
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="logo">
+        BREW<span>//</span>MATCH
+    </div>
+
+    <p>
+        Find your perfect brew.
+    </p>
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="script.js"></script>
+
+</body>
+</html>

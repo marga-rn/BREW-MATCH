@@ -1,0 +1,691 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f6f1ea;
+    color: #2b1d16;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 18px 6%;
+
+    background: #24150f;
+    color: white;
+}
+
+.logo {
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #d79b62;
+}
+
+.navbar nav {
+    display: flex;
+    gap: 25px;
+}
+
+.navbar nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.nav-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-actions button {
+    border: none;
+    background: #d79b62;
+    color: #24150f;
+    padding: 9px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 85vh;
+
+    display: flex;
+    align-items: center;
+
+    padding: 80px 8%;
+
+    background:
+        linear-gradient(
+            rgba(36,21,15,.85),
+            rgba(36,21,15,.85)
+        ),
+        radial-gradient(
+            circle at center,
+            #8a5b3d,
+            #24150f
+        );
+
+    color: white;
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.eyebrow {
+    color: #b87542;
+    font-size: .8rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+}
+
+.hero .eyebrow {
+    color: #d79b62;
+}
+
+.hero h1 {
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: .9;
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    color: #d79b62;
+}
+
+.hero p {
+    max-width: 550px;
+    margin-bottom: 25px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.primary-btn,
+.secondary-btn {
+    padding: 13px 20px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.primary-btn {
+    background: #b87542;
+    color: white;
+}
+
+.secondary-btn {
+    background: transparent;
+    border: 1px solid #d79b62;
+    color: white;
+}
+
+.full-btn {
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section {
+    padding: 90px 7%;
+}
+
+.section-heading {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 45px;
+}
+
+.section-heading h2 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+
+/* =========================
+   QUIZ
+========================= */
+
+.quiz-card {
+    max-width: 800px;
+    margin: auto;
+
+    background: white;
+    padding: 35px;
+
+    border-radius: 15px;
+    box-shadow: 0 10px 35px rgba(0,0,0,.08);
+}
+
+.question {
+    margin-bottom: 35px;
+}
+
+.question h3 {
+    margin-bottom: 15px;
+}
+
+.options {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.quiz-option {
+    flex: 1;
+    min-width: 120px;
+
+    padding: 13px;
+
+    border: 1px solid #ddd;
+    background: #fafafa;
+
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.quiz-option.selected {
+    background: #b87542;
+    color: white;
+    border-color: #b87542;
+}
+
+#quizResult {
+    margin-top: 25px;
+}
+
+
+/* =========================
+   MENU
+========================= */
+
+.menu-section {
+    background: #ede4da;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(230px, 1fr));
+
+    gap: 25px;
+}
+
+.menu-card {
+    background: white;
+    padding: 25px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.07);
+}
+
+.menu-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.menu-card h3 {
+    margin-bottom: 7px;
+}
+
+.menu-card p {
+    color: #777;
+    font-size: .9rem;
+    min-height: 55px;
+}
+
+.price {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+
+/* =========================
+   ORDERS
+========================= */
+
+.order-card {
+    max-width: 850px;
+    margin: 0 auto 20px;
+
+    background: white;
+    padding: 25px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 7px 25px rgba(0,0,0,.07);
+
+    transition: .25s ease;
+}
+
+.order-card.live-updated {
+    animation: orderUpdated .8s ease;
+}
+
+@keyframes orderUpdated {
+
+    0% {
+        transform: scale(1);
+        box-shadow: 0 7px 25px rgba(0,0,0,.07);
+    }
+
+    50% {
+        transform: scale(1.015);
+        box-shadow: 0 10px 35px rgba(184,117,66,.35);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 7px 25px rgba(0,0,0,.07);
+    }
+
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.status {
+    display: inline-block;
+    padding: 7px 12px;
+    border-radius: 20px;
+
+    background: #f0e0d2;
+    color: #7a4726;
+
+    font-size: .8rem;
+    font-weight: bold;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 50px;
+    color: #777;
+}
+
+
+/* =========================
+   LIVE STATUS
+========================= */
+
+.live-status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 12px;
+
+    padding: 7px 12px;
+
+    border-radius: 30px;
+
+    background: #e8f7ec;
+
+    color: #26733d;
+
+    font-size: .8rem;
+
+    font-weight: bold;
+
+}
+
+.live-dot {
+
+    width: 9px;
+
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: #35a853;
+
+    display: inline-block;
+
+    animation: livePulse 1.5s infinite;
+
+}
+
+@keyframes livePulse {
+
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: .45;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+}
+
+.live-status.offline {
+
+    background: #f8eaea;
+
+    color: #a33a3a;
+
+}
+
+.live-status.offline .live-dot {
+
+    background: #d9534f;
+
+    animation: none;
+
+}
+
+
+/* =========================
+   ORDER STATUS PROGRESS
+========================= */
+
+.order-progress {
+
+    width: 100%;
+
+    height: 8px;
+
+    background: #eee;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    margin: 15px 0;
+
+}
+
+.order-progress-bar {
+
+    height: 100%;
+
+    background: #b87542;
+
+    border-radius: 20px;
+
+    transition: width .5s ease;
+
+}
+
+.order-status-message {
+
+    font-size: .9rem;
+
+    color: #777;
+
+    margin-bottom: 15px;
+
+}
+
+
+/* =========================
+   MODALS
+========================= */
+
+.modal {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 2000;
+
+    background: rgba(0,0,0,.65);
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-box {
+    position: relative;
+
+    width: 100%;
+    max-width: 500px;
+
+    max-height: 90vh;
+    overflow-y: auto;
+
+    background: white;
+    padding: 30px;
+
+    border-radius: 15px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+
+    border: none;
+    background: none;
+
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.modal-box h2 {
+    margin-bottom: 20px;
+}
+
+.modal-box input,
+.modal-box select,
+.modal-box textarea {
+    width: 100%;
+
+    padding: 12px;
+    margin-bottom: 15px;
+
+    border: 1px solid #ddd;
+    border-radius: 7px;
+}
+
+.modal-box textarea {
+    min-height: 100px;
+}
+
+.checkbox {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.checkbox input {
+    width: auto;
+    margin: 0;
+}
+
+.switch-auth {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.switch-auth button {
+    border: none;
+    background: none;
+    color: #b87542;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cart-total,
+.checkout-total {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 20px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid #ddd;
+
+    font-size: 1.2rem;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid #eee;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    padding: 45px 7%;
+
+    background: #24150f;
+    color: white;
+
+    text-align: center;
+}
+
+footer p {
+    color: #bbb;
+    margin-top: 8px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 850px) {
+
+    .navbar {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .navbar nav {
+        order: 3;
+        width: 100%;
+
+        justify-content: center;
+
+        overflow-x: auto;
+    }
+
+    .hero {
+        min-height: 75vh;
+        padding: 60px 7%;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+
+    .section {
+        padding: 60px 5%;
+    }
+
+}
+
+@media (max-width: 550px) {
+
+    .nav-actions {
+        width: 100%;
+    }
+
+    .nav-actions button {
+        flex: 1;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .hero-buttons button {
+        width: 100%;
+    }
+
+    .quiz-card {
+        padding: 20px;
+    }
+
+    .section-heading h2 {
+        font-size: 2.3rem;
+    }
+
+    .order-header {
+        flex-direction: column;
+    }
+
+}
